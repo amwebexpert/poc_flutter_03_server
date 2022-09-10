@@ -14,6 +14,8 @@
   <input type="submit" value="Send"/>
 </form>
 
+<br />
+<br />
 <div id="messages"></div>
 
 <script>
@@ -24,7 +26,8 @@
 
   // send message from the form
   document.forms.publish.onsubmit = function() {
-    let outgoingMessage = this.message.value;
+    const outgoingMessage = this.message.value;
+    this.message.value = '';
 
     socket.send(outgoingMessage);
     return false;

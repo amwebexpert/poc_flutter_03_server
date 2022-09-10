@@ -62,6 +62,4 @@ function onSocketConnect(ws) {
 }
 
 let log = console.log;
-const port = 80;
-console.log("Starting the server, listening on port ", port);
-http.createServer(accept).listen(port);
+http.createServer(accept).listen();

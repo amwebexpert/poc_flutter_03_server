@@ -1,11 +1,3 @@
-/**
-Before running:
-> npm install ws
-Then:
-> node server.js
-> open http://localhost:8080 in the browser
-*/
-
 const http = require("http");
 const fs = require("fs");
 const ws = new require("ws");

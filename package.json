@@ -4,7 +4,8 @@
   "description": "WebSockets example project",
   "main": "index.js",
   "scripts": {
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "build": "ncp src public"
   },
   "keywords": [
     "websocket"
@@ -13,5 +14,8 @@
   "license": "MIT",
   "dependencies": {
     "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "ncp": "^2.0.0"
   }
 }

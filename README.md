@@ -7,3 +7,10 @@ Server for handling communications between Flutter and other clients like webapp
 
 * https://poc-flutter-03-server.herokuapp.com/
 
+
+### References
+
+- https://github.com/8Observer8/mouse-click-js
+- https://www.gamedev.net/blogs/entry/2272759-deploying-a-nodejs-server-with-websockets-on-a-free-hosting-heroku-web-desktop-clients-qt/
+- https://javascript.info/websocket
+

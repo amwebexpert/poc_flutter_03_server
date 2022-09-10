@@ -8,7 +8,7 @@
 
 <script>
 alert(location.host);
-const url = 'ws://localhost/ws';
+const url = location.host == 'localhost' ? 'ws://localhost/ws' : 'wss://https://poc-flutter-03-server.vercel.app/ws';
 // let url = location.host == 'localhost:8080' ?
 //   'ws://localhost:8080/ws' : location.host == 'javascript.local' ?
 //   `ws://javascript.local/article/websocket/chat/ws` : // dev integration with local site

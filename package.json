@@ -1,0 +1,17 @@
+{
+  "name": "web-sockets-example",
+  "version": "1.0.0",
+  "description": "WebSockets example project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "keywords": [
+    "websocket"
+  ],
+  "author": "amwebexpert@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^8.8.1"
+  }
+}

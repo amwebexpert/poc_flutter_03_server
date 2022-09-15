@@ -14,19 +14,22 @@
   <input type="submit" value="Send"/>
 </form>
 
+<br />
+<br />
 <div id="messages"></div>
 
 <script>
-  const url = location.host == 'localhost' ? 'ws://localhost/ws' : 'wss://https://poc-flutter-03-server.vercel.app/ws';
+  const url = location.host == 'localhost' ? 'ws://localhost/ws' : 'wss://poc-flutter-03-server.herokuapp.com/ws';
   document.getElementById('url').prepend(url);
 
   let socket = new WebSocket(url);
 
   // send message from the form
   document.forms.publish.onsubmit = function() {
-    let outgoingMessage = this.message.value;
+    const outgoingMessage = this.message.value;
+    this.message.value = '';
 
-    socket.send(outgoingMessage);
+    socket.send(JSON.stringify({username: outgoingMessage}));
     return false;
   };
 

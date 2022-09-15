@@ -29,7 +29,7 @@
     const outgoingMessage = this.message.value;
     this.message.value = '';
 
-    socket.send(outgoingMessage);
+    socket.send(JSON.stringify({username: outgoingMessage}));
     return false;
   };
 

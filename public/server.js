@@ -31,12 +31,10 @@ function accept(req, res) {
 function onSocketConnect(ws) {
     console.log('onSocketConnect: adding a new connected client');
     clients.add(ws);
-    ws.on('message', function (message) {
-        console.log('Server side onMessage', message);
-        message = message.slice(0, 50); // max message length will be 50
-        clients.forEach(function (client) {
-            client.send(message);
-        });
+    ws.on('message', function (value) {
+        var message = "".concat(value);
+        console.log('Server side onMessage:::', message);
+        clients.forEach(function (client) { return client.send(message); });
     });
     ws.on('close', function () {
         console.log('Server side onClose');
@@ -44,6 +42,6 @@ function onSocketConnect(ws) {
     });
 }
 var port = process.env.PORT || 80;
-console.log('Starting the server, listening on port ', port);
+console.log('Starting the server. Listening on port ', port);
 http.createServer(accept).listen(port);
 //# sourceMappingURL=server.js.map

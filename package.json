@@ -4,6 +4,7 @@
   "description": "WebSockets example project",
   "main": "index.js",
   "scripts": {
+    "compile": "tsc",
     "start": "node src/server.js",
     "build": "ncp src public"
   },
@@ -13,9 +14,12 @@
   "author": "amwebexpert@gmail.com",
   "license": "MIT",
   "dependencies": {
+    "typescript": "^4.8.3",
     "ws": "^8.8.1"
   },
   "devDependencies": {
+    "@types/node": "^18.7.18",
+    "@types/ws": "^8.5.3",
     "ncp": "^2.0.0"
   }
 }

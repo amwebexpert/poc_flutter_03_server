@@ -1,49 +1,53 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var fs = require("fs");
-var http = require("http");
-var ws = require("ws");
-var wss = new ws.Server({ noServer: true });
-var clients = new Set();
-function accept(req, res) {
-    var _a;
+import * as fs from 'fs';
+import * as http from 'http';
+import * as ws from 'ws';
+
+const wss = new ws.Server({ noServer: true });
+const clients = new Set<ws.WebSocket>();
+
+function accept(req: http.IncomingMessage, res: http.ServerResponse) {
     console.log('Accepting an incoming connection...');
-    if (req.url == '/ws' &&
+
+    if (
+        req.url == '/ws' &&
         req.headers.upgrade &&
         req.headers.upgrade.toLowerCase() === 'websocket' &&
-        ((_a = req.headers.connection) === null || _a === void 0 ? void 0 : _a.match(/\bupgrade\b/i)) // can be Connection: keep-alive, Upgrade
+        req.headers.connection?.match(/\bupgrade\b/i) // can be Connection: keep-alive, Upgrade
     ) {
         console.log('Upgrading connection to websocket');
         wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
-    }
-    else if (req.url == '/') {
+    } else if (req.url == '/') {
         // index.html
         console.log('Returning static page index.html file...');
         fs.createReadStream('./src/index.html').pipe(res);
-    }
-    else {
+    } else {
         // page not found
         console.log('Returning classic HTTP 404 NotFound');
         res.writeHead(404);
         res.end();
     }
 }
-function onSocketConnect(ws) {
+
+function onSocketConnect(ws: ws.WebSocket) {
     console.log('onSocketConnect: adding a new connected client');
     clients.add(ws);
-    ws.on('message', function (message) {
+
+    ws.on('message', function (message: string) {
         console.log('Server side onMessage', message);
+
         message = message.slice(0, 50); // max message length will be 50
-        clients.forEach(function (client) {
+
+        clients.forEach(client => {
             client.send(message);
         });
     });
+
     ws.on('close', function () {
         console.log('Server side onClose');
         clients.delete(ws);
     });
 }
-var port = process.env.PORT || 80;
+
+const port = process.env.PORT || 80;
 console.log('Starting the server, listening on port ', port);
 http.createServer(accept).listen(port);
-//# sourceMappingURL=server.js.map
